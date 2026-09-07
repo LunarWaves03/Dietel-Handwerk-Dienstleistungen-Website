@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dietel — Handwerk &amp; Dienstleistung | Br.-Miesau</title>
+<meta name="description" content="Dietel Handwerk & Dienstleistung: Garten- und Landschaftsbau, Pflasterarbeiten, Trockenbau, Bodenleger und Hausmeisterservice in Br.-Miesau und Umgebung. Zuverlässig, persönlich, fair.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-950:#ffffff;
+  --green-900:#3c59ff;
+  --green-800:#3c59ff;
+  --green-700:#b41c1c;
+  --green-600:#993b3b;
+  --green-500:#c92121;
+  --green-300:#971d1da9;
+  --sage-100:#e8eaf2;
+  --sage-050:#f1f2f7;
+  --cream:#f7f8fb;
+  --blue-ink:#751e1e;
+  --red-accent:#C33B26;
+  --ink:#862929;
+  --ink-soft:#383c63;
+  --line:rgba(21, 25, 44, 0.12);
+  --radius-lg:28px;
+  --radius-md:18px;
+  --radius-sm:10px;
+  --shadow-soft:0 20px 50px -25px rgba(21, 21, 44, 0.35);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+}
+
+body{
+  margin:0;
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+h1,h2,h3,h4{
+  font-family:'Manrope',sans-serif;
+  margin:0;
+  color:#000000;
+  letter-spacing:-0.02em;
+}
+
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;}
+
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--green-700);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:500;
+}
+.eyebrow::before{
+  content:"";
+  width:22px;
+  height:1px;
+  background:var(--green-600);
+  display:inline-block;
+}
+
+.wrap{
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 32px;
+}
+
+/* ===== Reveal on scroll ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  will-change:transform,opacity;
+}
+.reveal.is-visible{opacity:1;transform:translateY(0);}
+.reveal-stagger > *{transition-delay:calc(var(--i,0) * 90ms);}
+
+/* ===== Nav ===== */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  padding:18px 0;
+  transition:background 0.4s var(--ease), box-shadow 0.4s var(--ease), padding 0.4s var(--ease), border-color .4s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(247, 248, 251, 0.86);
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+.nav .wrap{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:20px;
+}
+.nav .brand{justify-self:start;}
+.nav .nav-links{justify-self:center;}
+.nav .nav-cta{justify-self:end;}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.brand img{height:40px;width:auto;transition:height .4s var(--ease);}
+.nav.scrolled .brand img{height:34px;}
+.brand-name{
+  font-family:'Manrope',sans-serif;
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  color:#000000;
+  line-height:1.2;
+  white-space:nowrap;
+}
+.nav-links{
+  display:flex;
+  gap:6px;
+  list-style:none;
+  padding:5px;margin:0;
+  font-size:14.5px;
+  font-weight:500;
+  color:#000000;
+  background:rgba(21,25,44,0.04);
+  border:1px solid var(--line);
+  border-radius:999px;
+}
+.nav-links a{
+  position:relative;
+  display:block;
+  padding:8px 18px;
+  border-radius:999px;
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+.nav-links a:hover{background:#fff;color:var(--green-900);}
+
+.nav-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:var(--green-900);
+  color:#fff !important;
+  padding:11px 20px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:600;
+  transition:background .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease);
+  box-shadow:0 8px 20px -10px rgba(21,44,29,0.6);
+}
+.nav-cta:hover{background:var(--green-700);transform:translateY(-2px);box-shadow:0 12px 26px -10px rgba(21,44,29,0.55);}
+.nav-toggle{display:none;}
+
+/* ===== Hero ===== */
+.hero{
+  position:relative;
+  padding:168px 0 120px;
+  overflow:hidden;
+  background:
+    radial-gradient(1100px 620px at 82% -10%, rgba(60,89,255,0.16), transparent 60%),
+    linear-gradient(180deg,var(--cream),var(--sage-050) 70%);
+}
+.hero-blob{
+  position:absolute;
+  right:-220px;
+  top:-160px;
+  width:900px;
+  height:900px;
+  z-index:0;
+  opacity:0.9;
+  animation:blob-float 22s ease-in-out infinite;
+}
+@keyframes blob-float{
+  0%,100%{transform:translate(0,0) rotate(0deg);}
+  50%{transform:translate(-18px,26px) rotate(6deg);}
+}
+.hero-grid{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  gap:60px;
+  align-items:center;
+}
+.hero-kicker{margin-bottom:26px;}
+.hero h1{
+  font-size:clamp(2.6rem,5vw,4.2rem);
+  line-height:1.03;
+  font-weight:800;
+}
+.hero h1 em{
+  font-style:normal;
+  color:var(--green-700);
+  position:relative;
+  white-space:nowrap;
+}
+.hero h1 .brush{
+  position:absolute;
+  left:-3%;right:-3%;bottom:0.05em;
+  height:0.32em;
+  background:var(--green-300);
+  z-index:-1;
+  border-radius:6px 3px 8px 3px;
+  transform:scaleX(0);
+  transform-origin:left;
+  animation:brush-in 1s var(--ease) 0.6s forwards;
+}
+@keyframes brush-in{to{transform:scaleX(1);}}
+.hero-sub{
+  margin-top:26px;
+  font-size:18px;
+  line-height:1.65;
+  color:var(--ink-soft);
+  max-width:480px;
+}
+.hero-actions{
+  margin-top:38px;
+  display:flex;
+  gap:16px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:16px 28px;
+  border-radius:999px;
+  font-weight:600;
+  font-size:15px;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease), color .35s var(--ease);
+  cursor:pointer;
+  border:1px solid transparent;
+}
+.btn-primary{
+  background:var(--green-900);
+  color:#fff;
+  box-shadow:0 14px 30px -14px rgba(21,44,29,0.65);
+}
+.btn-primary:hover{background:var(--green-700);transform:translateY(-3px);box-shadow:0 18px 34px -12px rgba(21,44,29,0.55);}
+.btn-primary svg{transition:transform .35s var(--ease);}
+.btn-primary:hover svg{transform:translateX(4px);}
+.btn-ghost{
+  background:transparent;
+  color:#000000;
+  border-color:var(--line);
+}
+.btn-ghost:hover{border-color:var(--green-600);background:rgba(67,130,75,0.06);transform:translateY(-3px);}
+
+.hero-visual{
+  position:relative;
+  aspect-ratio:1/1.12;
+  border-radius:var(--radius-lg);
+  background:var(--green-950);
+  overflow:hidden;
+  box-shadow:var(--shadow-soft);
+  display:flex;
+  flex-direction:column;
+}
+.plan-img{
+  width:100%;
+  flex:1;
+  min-height:0;
+  display:block;
+  object-fit:contain;
+  object-position:center;
+  padding:34px;
+  background:var(--cream);
+}
+.plan-draw{
+  stroke-dasharray:600;
+  stroke-dashoffset:600;
+  animation:draw-line 2.2s var(--ease) 0.5s forwards;
+}
+@keyframes draw-line{to{stroke-dashoffset:0;}}
+@media (prefers-reduced-motion: reduce){
+  .plan-draw{animation:none;stroke-dashoffset:0;}
+}
+.plan-titleblock{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:18px 24px;
+  background:var(--cream);
+  border-top:1px solid rgba(21,44,29,0.08);
+}
+.plan-meta{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  align-items:flex-start;
+  text-align:left;
+}
+.plan-meta-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--green-600);
+}
+.plan-meta-value{
+  font-size:13.5px;
+  font-weight:600;
+  color:#000000;
+}
+
+/* ===== Marquee strip ===== */
+.strip{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:var(--sage-050);
+  padding:22px 0;
+}
+.strip .wrap{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:20px 40px;
+}
+.strip-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:13.5px;
+  font-weight:600;
+  color:var(--green-800);
+  letter-spacing:0.01em;
+}
+.strip-item svg{flex-shrink:0;color:var(--green-600);}
+
+/* ===== Section basics ===== */
+section{position:relative;}
+.section-pad{padding:120px 0;}
+.section-head{
+  max-width:640px;
+  margin-bottom:64px;
+}
+.section-head h2{
+  font-size:clamp(2rem,3.4vw,2.8rem);
+  margin-top:18px;
+  line-height:1.12;
+}
+.section-head p{
+  margin-top:20px;
+  font-size:17px;
+  line-height:1.7;
+  color:var(--ink-soft);
+}
+
+/* divider waves */
+.divider{
+  display:block;
+  width:100%;
+  height:90px;
+  margin-bottom:-2px;
+}
+
+/* ===== About ===== */
+.about{background:var(--green-950);color:#000000;}
+.about-grid{
+  display:grid;
+  grid-template-columns:0.9fr 1.1fr;
+  gap:70px;
+  align-items:start;
+}
+.about .eyebrow{color:var(--green-300);}
+.about .eyebrow::before{background:var(--green-500);}
+.about h2{color:#000000;font-size:clamp(1.9rem,3.2vw,2.5rem);margin-top:18px;line-height:1.2;}
+.about-lead{
+  margin-top:22px;
+  font-size:17.5px;
+  line-height:1.75;
+  color:rgba(0,0,0,0.72);
+}
+.about-facts{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px 32px;
+}
+.fact{
+  border-top:1px solid rgba(0,0,0,0.16);
+  padding-top:18px;
+}
+.fact strong{
+  display:block;
+  font-family:'Manrope',sans-serif;
+  font-size:15px;
+  font-weight:700;
+  margin-bottom:8px;
+  color:#000000;
+}
+.fact span{
+  font-size:14.5px;
+  color:rgba(0,0,0,0.62);
+  line-height:1.55;
+}
+
+/* ===== Services ===== */
+.services{background:var(--sage-050);}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.service-card{
+  background:var(--cream);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  padding:34px 30px;
+  position:relative;
+  overflow:hidden;
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s var(--ease);
+}
+.service-card::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--green-600),var(--green-300));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .5s var(--ease);
+}
+.service-card:hover{
+  transform:translateY(-8px);
+  box-shadow:var(--shadow-soft);
+  border-color:transparent;
+}
+.service-card:hover::before{transform:scaleX(1);}
+.service-icon{
+  width:52px;height:52px;
+  border-radius:14px;
+  background:var(--sage-100);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--green-700);
+  margin-bottom:22px;
+  transition:background .4s var(--ease), transform .4s var(--ease);
+}
+.service-card:hover .service-icon{background:var(--green-800);color:#fff;transform:scale(1.06) rotate(-4deg);}
+.service-card h3{
+  font-size:19px;
+  margin-bottom:10px;
+}
+.service-card p{
+  font-size:14.5px;
+  line-height:1.6;
+  color:var(--ink-soft);
+  margin-bottom:16px;
+}
+.service-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.service-tags span{
+  font-size:12px;
+  font-weight:500;
+  color:var(--green-800);
+  background:var(--sage-100);
+  padding:5px 11px;
+  border-radius:999px;
+}
+.service-card:hover .service-tags span{background:var(--sage-050);}
+
+/* ===== Why us ===== */
+.why{background:var(--cream);}
+.why-grid{
+  display:grid;
+  grid-template-columns:0.85fr 1.15fr;
+  gap:70px;
+  align-items:center;
+}
+.rings{
+  position:relative;
+  width:100%;
+  max-width:380px;
+  aspect-ratio:1/1;
+  margin:0 auto;
+}
+.rings svg{width:100%;height:100%;}
+.ring-num{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+}
+.ring-num strong{
+  font-family:'Manrope',sans-serif;
+  font-size:52px;
+  font-weight:800;
+  color:#000000;
+  line-height:1;
+}
+.ring-num span{
+  margin-top:8px;
+  font-size:13px;
+  color:var(--ink-soft);
+  max-width:150px;
+  line-height:1.4;
+}
+.why-list{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+.why-item{
+  display:grid;
+  grid-template-columns:44px 1fr;
+  gap:20px;
+  padding:24px 0;
+  border-bottom:1px solid var(--line);
+}
+.why-item:first-child{padding-top:0;}
+.why-item .num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  color:var(--green-600);
+  padding-top:4px;
+}
+.why-item h4{font-size:17.5px;margin-bottom:6px;}
+.why-item p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;}
+
+/* ===== Process ===== */
+.process{background:var(--green-950);}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  position:relative;
+}
+.steps::before{
+  content:"";
+  position:absolute;
+  top:26px;left:6%;right:6%;
+  height:1px;
+  background:repeating-linear-gradient(90deg,var(--line) 0 8px, transparent 8px 16px);
+  z-index:0;
+}
+.step{
+  position:relative;
+  z-index:1;
+  background:var(--cream);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  padding:26px 22px 24px;
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.step:hover{transform:translateY(-6px);box-shadow:var(--shadow-soft);}
+.step-num{
+  width:52px;height:52px;
+  border-radius:50%;
+  background:var(--green-950);
+  color:#000000;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Manrope',sans-serif;
+  font-weight:700;
+  font-size:17px;
+  margin-bottom:18px;
+}
+.step h4{font-size:16.5px;margin-bottom:8px;}
+.step p{font-size:13.8px;color:var(--ink-soft);line-height:1.55;}
+
+/* ===== CTA ===== */
+.cta{
+  background:var(--green-950);
+  border-radius:var(--radius-lg);
+  margin:0 32px;
+  padding:70px 60px;
+  position:relative;
+  overflow:hidden;
+  color:#000000;
+  text-align:center;
+}
+.cta-inner{position:relative;z-index:2;max-width:600px;margin:0 auto;}
+.cta .eyebrow{color:var(--green-300);justify-content:center;}
+.cta .eyebrow::before{display:none;}
+.cta h2{color:#000000;font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:16px;line-height:1.15;}
+.cta p{margin-top:18px;color:rgba(0,0,0,0.72);font-size:16.5px;line-height:1.6;}
+.cta-actions{
+  margin-top:34px;
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.cta .btn-primary{background:var(--green-900);color:#fff;box-shadow:0 16px 32px -14px rgba(0,0,0,0.5);}
+.cta .btn-primary:hover{background:var(--green-500);color:#fff;}
+.cta .btn-ghost{color:#000000;border-color:rgba(0,0,0,0.3);}
+.cta .btn-ghost:hover{border-color:#000000;background:rgba(0,0,0,0.06);}
+.cta-blob{
+  position:absolute;
+  width:600px;height:600px;
+  right:-160px;bottom:-220px;
+  opacity:0.5;
+  animation:blob-float 26s ease-in-out infinite reverse;
+}
+
+/* ===== Footer ===== */
+footer{padding:80px 0 34px;}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.2fr 0.8fr 0.8fr 1fr;
+  gap:50px;
+  padding-bottom:56px;
+  border-bottom:1px solid var(--line);
+}
+.footer-brand img{height:38px;margin-bottom:18px;}
+.footer-brand p{font-size:14px;color:var(--ink-soft);line-height:1.6;max-width:280px;}
+.footer-col h5{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--green-700);
+  margin-bottom:18px;
+  font-weight:500;
+}
+.footer-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+.footer-col a{font-size:14.5px;color:var(--ink-soft);transition:color .3s var(--ease);}
+.footer-col a:hover{color:var(--green-700);}
+.footer-contact li{display:flex;align-items:center;gap:10px;}
+.footer-contact svg{flex-shrink:0;color:var(--green-600);}
+.footer-bottom{
+  padding-top:28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+  font-size:13px;
+  color:var(--ink-soft);
+}
+.footer-bottom .legal{display:flex;gap:22px;}
+
+/* ===== responsive ===== */
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-visual{max-width:440px;margin:0 auto;order:-1;}
+  .about-grid{grid-template-columns:1fr;gap:40px;}
+  .why-grid{grid-template-columns:1fr;}
+  .service-grid{grid-template-columns:repeat(2,1fr);}
+  .steps{grid-template-columns:repeat(2,1fr);}
+  .steps::before{display:none;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:720px){
+  .wrap{padding:0 22px;}
+  .nav-links{display:none;}
+  .nav .wrap{grid-template-columns:1fr auto;}
+  .brand-name{display:none;}
+  .hero{padding:130px 0 80px;}
+  .section-pad{padding:80px 0;}
+  .service-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr;}
+  .cta{margin:0 16px;padding:52px 26px;}
+  .footer-grid{grid-template-columns:1fr;gap:36px;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;}
+  .plan-titleblock{padding:14px 18px;gap:12px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img src="Logo.png" alt="Dietel Handwerk & Dienstleistungen">
+      <span class="brand-name">Dietel Handwerk &amp; Dienstleistungen</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#ueber">Über uns</a></li>
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="#ablauf">Ablauf</a></li>
+    </ul>
+    <a class="nav-cta" href="tel:+491639709933">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Anrufen
+    </a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <svg class="hero-blob" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path fill="#D8DEF7" d="M433,318Q413,386,352,422Q291,458,224,435Q157,412,111,357Q65,302,90,231Q115,160,180,120Q245,80,313,100Q381,120,417,178Q453,236,433,318Z"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow hero-kicker reveal">Handwerk &amp; Dienstleistung · Br.-Miesau</div>
+      <h1 class="reveal" style="transition-delay:.08s">Für Haus, Hof<br>und <em>Garten<span class="brush"></span></em> —<br>alles aus einer Hand.</h1>
+      <p class="hero-sub reveal" style="transition-delay:.16s">Garten- und Landschaftsbau, Pflasterarbeiten, Trockenbau, Bodenleger und Hausmeisterservice — persönlich betreut von Leandro Dietel, zuverlässig umgesetzt in Br.-Miesau und Umgebung.</p>
+      <div class="hero-actions reveal" style="transition-delay:.24s">
+        <a href="tel:+491639709933" class="btn btn-primary">
+          Kostenlos beraten lassen
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#leistungen" class="btn btn-ghost">Leistungen ansehen</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal" style="transition-delay:.2s">
+      <img src="Logo.png" alt="Dietel Handwerk &amp; Dienstleistung" class="plan-img">
+
+      <div class="plan-titleblock">
+        <div class="plan-meta">
+          <span class="plan-meta-label">Ausführung</span>
+          <span class="plan-meta-value">Leandro Dietel &middot; Br.-Miesau</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="strip-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Zuverlässig</div>
+    <div class="strip-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Persönlich</div>
+    <div class="strip-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Fair</div>
+    <div class="strip-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Alles aus einer Hand</div>
+    <div class="strip-item"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Regional in Br.-Miesau</div>
+  </div>
+</div>
+
+<section class="about section-pad" id="ueber">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <div class="eyebrow">Über Dietel</div>
+      <h2>Ein Ansprechpartner für viele Gewerke.</h2>
+      <p class="about-lead">Ob gepflegter Garten, saubere Pflasterflächen oder Arbeiten im Innenausbau — Leandro Dietel übernimmt Ihr Projekt persönlich, von der ersten Besichtigung bis zur fertigen Ausführung. Faire Preise, saubere Arbeit, verlässliche Absprachen.</p>
+    </div>
+    <div class="about-facts reveal" style="transition-delay:.1s">
+      <div class="fact">
+        <strong>Handwerk &amp; Garten</strong>
+        <span>Von Gartenpflege über Pflasterarbeiten bis Trockenbau und Bodenverlegung.</span>
+      </div>
+      <div class="fact">
+        <strong>Persönlich vor Ort</strong>
+        <span>Leandro Dietel begleitet jedes Projekt selbst — kein Callcenter, keine Umwege.</span>
+      </div>
+      <div class="fact">
+        <strong>Br.-Miesau &amp; Umgebung</strong>
+        <span>Regional verwurzelt und kurzfristig erreichbar für Privat- und Gewerbekunden.</span>
+      </div>
+      <div class="fact">
+        <strong>Faire Konditionen</strong>
+        <span>Transparente Angebote ohne versteckte Kosten, abgestimmt auf Ihr Budget.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services section-pad" id="leistungen">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Leistungen</div>
+      <h2>Fünf Gewerke, ein Anruf.</h2>
+      <p>Von der Rasenkante bis zur Trennwand — die wichtigsten Leistungen im Überblick.</p>
+    </div>
+    <div class="service-grid reveal-stagger">
+      <div class="service-card reveal" style="--i:0">
+        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4-2 7-6 7-11a7 7 0 0 0-14 0c0 5 3 9 7 11Z"/><path d="M12 13v9"/></svg></div>
+        <h3>Garten- &amp; Landschaftsbau</h3>
+        <p>Rasen mähen, Vertikutieren, Heckenschnitt und die laufende Pflege Ihrer Grünflächen.</p>
+        <div class="service-tags"><span>Rasenpflege</span><span>Heckenschnitt</span><span>Unkraut &amp; Laub</span></div>
+      </div>
+      <div class="service-card reveal" style="--i:1">
+        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>Pflasterarbeiten &amp; Reinigung</h3>
+        <p>Neues Pflaster, Wegbau sowie Hochdruckreinigung von Einfahrten und Terrassen.</p>
+        <div class="service-tags"><span>Pflaster legen</span><span>Hochdruckreinigung</span><span>Moos &amp; Algen</span></div>
+      </div>
+      <div class="service-card reveal" style="--i:2">
+        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <h3>Trockenbau &amp; Montage</h3>
+        <p>Wände, Decken und Trennwände sowie Montage und Demontage von Möbeln und Einrichtung.</p>
+        <div class="service-tags"><span>Trennwände</span><span>Möbelmontage</span></div>
+      </div>
+      <div class="service-card reveal" style="--i:3">
+        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
+        <h3>Bodenleger</h3>
+        <p>Fachgerechte Verlegung von Laminat, Vinyl, Parkett und weiteren Bodenbelägen.</p>
+        <div class="service-tags"><span>Laminat</span><span>Vinyl</span><span>Parkett</span></div>
+      </div>
+      <div class="service-card reveal" style="--i:4">
+        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/></svg></div>
+        <h3>Hausmeisterservice</h3>
+        <p>Regelmäßige Betreuung, Wartung und Instandhaltung Ihrer Immobilie — zuverlässig organisiert.</p>
+        <div class="service-tags"><span>Betreuung</span><span>Wartung</span></div>
+      </div>
+      <div class="service-card reveal" style="--i:5">
+        <div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78Z"/></svg></div>
+        <h3>Alles aus einer Hand</h3>
+        <p>Mehrere Gewerke kombiniert, ein persönlicher Ansprechpartner für Ihr gesamtes Projekt.</p>
+        <div class="service-tags"><span>Persönlich</span><span>Koordiniert</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process section-pad" id="ablauf">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Ablauf</div>
+      <h2>So läuft die Zusammenarbeit ab.</h2>
+      <p>Vom ersten Kontakt bis zur fertigen Arbeit — unkompliziert und transparent.</p>
+    </div>
+    <div class="steps reveal-stagger">
+      <div class="step reveal" style="--i:0">
+        <div class="step-num">01</div>
+        <h4>Anfrage stellen</h4>
+        <p>Telefon oder E-Mail — kurz schildern, worum es geht.</p>
+      </div>
+      <div class="step reveal" style="--i:1">
+        <div class="step-num">02</div>
+        <h4>Vor-Ort-Termin</h4>
+        <p>Gemeinsame Begehung und Abstimmung der Details.</p>
+      </div>
+      <div class="step reveal" style="--i:2">
+        <div class="step-num">03</div>
+        <h4>Faires Angebot</h4>
+        <p>Transparente Kalkulation ohne versteckte Kosten.</p>
+      </div>
+      <div class="step reveal" style="--i:3">
+        <div class="step-num">04</div>
+        <h4>Umsetzung</h4>
+        <p>Saubere Ausführung im vereinbarten Zeitrahmen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" style="padding-top:70px;">
+  <div class="wrap">
+    <div class="cta reveal">
+      <svg class="cta-blob" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill="#26305F" d="M433,318Q413,386,352,422Q291,458,224,435Q157,412,111,357Q65,302,90,231Q115,160,180,120Q245,80,313,100Q381,120,417,178Q453,236,433,318Z"/>
+      </svg>
+      <div class="cta-inner">
+        <div class="eyebrow">Jetzt starten</div>
+        <h2>Erzählen Sie uns von Ihrem Projekt.</h2>
+        <p>Ob Garten, Pflaster oder Innenausbau — melden Sie sich unverbindlich, wir besprechen die nächsten Schritte.</p>
+        <div class="cta-actions">
+          <a href="tel:+491639709933" class="btn btn-primary">+49 163 9709933 anrufen</a>
+          <a href="mailto:leandrodietel@gmail.com?subject=Anfrage%20%C3%BCber%20die%20Website" class="btn btn-ghost">E-Mail schreiben</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="Logo.png" alt="Dietel Handwerk & Dienstleistung">
+        <p>Handwerk mit Qualität — Garten- und Landschaftsbau, Pflasterarbeiten, Trockenbau, Bodenleger und Hausmeisterservice in Br.-Miesau.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#ueber">Über uns</a></li>
+          <li><a href="#leistungen">Leistungen</a></li>
+          <li><a href="#ablauf">Ablauf</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Leistungen</h5>
+        <ul>
+          <li><a href="#leistungen">Garten &amp; Landschaft</a></li>
+          <li><a href="#leistungen">Pflasterarbeiten</a></li>
+          <li><a href="#leistungen">Trockenbau</a></li>
+          <li><a href="#leistungen">Bodenleger</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Kontakt</h5>
+        <ul class="footer-contact">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+491639709933">+49 163 9709933</a></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6 12 13 2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg><a href="mailto:leandrodietel@gmail.com">leandrodietel@gmail.com</a></li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Br.-Miesau</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Dietel Handwerk &amp; Dienstleistung — Leandro Dietel</span>
+      <div class="legal">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 30);
+}, {passive:true});
+
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduced){
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+}else{
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.14, rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+</script>
+</body>
+</html>
