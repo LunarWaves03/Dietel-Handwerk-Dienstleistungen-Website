@@ -1,11 +1,4 @@
 {
   "logoVersion": null,
-  "projekte": [
-    {
-      "id": "1789076752316",
-      "title": "Einfahrt Hecke Vorher - Nachher",
-      "before": "bilder/projekt-1789076752316-einfahrt-hecke-vorher-nachher-vorher.jpg",
-      "after": "bilder/projekt-1789076752316-einfahrt-hecke-vorher-nachher-nachher.jpg"
-    }
-  ]
+  "projekte": []
 }
