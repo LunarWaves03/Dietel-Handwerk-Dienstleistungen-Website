@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dietel — Handwerk &amp; Dienstleistung | Br.-Miesau</title>
 <meta name="description" content="Dietel Handwerk & Dienstleistung: Garten- und Landschaftsbau, Pflasterarbeiten, Trockenbau, Bodenleger und Hausmeisterservice in Br.-Miesau und Umgebung. Zuverlässig, persönlich, fair.">
+<link rel="icon" id="favicon" href="bilder/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -968,6 +969,12 @@ footer{padding:80px 0 34px;}
 .pair-empty{font-size:14px;color:var(--ink-soft);line-height:1.6;}
 .modal-card .btn{width:100%;justify-content:center;}
 
+.logo-row{display:flex;gap:16px;align-items:center;}
+.logo-row .field{flex:1;min-width:0;}
+.logo-preview{width:72px;height:72px;object-fit:contain;flex-shrink:0;border:1px solid var(--line);border-radius:var(--radius-sm);background:#fff;padding:6px;margin-bottom:18px;}
+.admin-section-title + form{margin-bottom:8px;}
+.modal-note code{font-size:0.95em;background:rgba(21,25,44,0.06);padding:1px 5px;border-radius:4px;}
+
 /* ===== responsive ===== */
 @media (max-width:980px){
   .hero-grid{grid-template-columns:1fr;}
@@ -1012,7 +1019,7 @@ footer{padding:80px 0 34px;}
 <nav class="nav" id="nav">
   <div class="wrap">
     <a href="#top" class="brand">
-      <img src="Logo.png" alt="Dietel Handwerk & Dienstleistungen">
+      <img data-logo src="bilder/logo.png" alt="Dietel Handwerk & Dienstleistungen">
       <span class="brand-name">Dietel Handwerk &amp; Dienstleistungen</span>
     </a>
     <ul class="nav-links">
@@ -1046,7 +1053,7 @@ footer{padding:80px 0 34px;}
       </div>
     </div>
     <div class="hero-visual reveal" style="transition-delay:.2s">
-      <img src="Logo.png" alt="Dietel Handwerk &amp; Dienstleistung" class="plan-img">
+      <img data-logo src="bilder/logo.png" alt="Dietel Handwerk &amp; Dienstleistung" class="plan-img">
 
       <div class="plan-titleblock">
         <div class="plan-meta">
@@ -1243,7 +1250,7 @@ footer{padding:80px 0 34px;}
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="Logo.png" alt="Dietel Handwerk & Dienstleistung">
+        <img data-logo src="bilder/logo.png" alt="Dietel Handwerk & Dienstleistung">
         <p>Handwerk mit Qualität — Garten- und Landschaftsbau, Pflasterarbeiten, Trockenbau, Bodenleger und Hausmeisterservice in Br.-Miesau.</p>
       </div>
       <div class="footer-col">
@@ -1292,31 +1299,39 @@ footer{padding:80px 0 34px;}
     <!-- ---------- Login ---------- -->
     <div id="loginView">
       <h3 id="modalTitle">Admin-Bereich</h3>
-      <p class="modal-sub">Anmelden, um Vorher-/Nachher-Bilder zu verwalten.</p>
-      <div class="form-msg error" id="loginError" hidden>Benutzername oder Passwort ist nicht korrekt.</div>
+      <p class="modal-sub">Mit dem GitHub-Zugangsschlüssel anmelden, um Referenzbilder und Logo zu verwalten.</p>
+      <div class="form-msg error" id="loginError" hidden></div>
       <form id="loginForm" autocomplete="off">
         <label class="field">
-          <span>Benutzername</span>
-          <input type="text" id="loginUser" autocomplete="username" required>
+          <span>GitHub-Token</span>
+          <input type="password" id="loginToken" placeholder="github_pat_…" required>
         </label>
-        <label class="field">
-          <span>Passwort</span>
-          <input type="password" id="loginPass" autocomplete="current-password" required>
-        </label>
-        <button class="btn btn-primary" type="submit">Anmelden</button>
+        <button class="btn btn-primary" type="submit" id="loginBtn">Anmelden</button>
       </form>
-      <p class="modal-note">Hinweis: Diese Anmeldung läuft vollständig im Browser und ersetzt keinen serverseitigen Schutz.</p>
+      <p class="modal-note">Der Token bleibt nur in diesem Tab gespeichert und wird beim Schließen des Tabs gelöscht. Nur wer Schreibrechte auf das Repository hat, kommt hier rein.</p>
     </div>
 
     <!-- ---------- Admin ---------- -->
     <div id="adminView" hidden>
       <div class="admin-head">
-        <h3>Vorher / Nachher</h3>
+        <h3>Website verwalten</h3>
         <button class="btn-small" type="button" id="logoutBtn">Abmelden</button>
       </div>
-
       <div class="form-msg ok" id="adminMsg" hidden></div>
 
+      <div class="admin-section-title">Logo</div>
+      <form id="logoForm" autocomplete="off">
+        <div class="logo-row">
+          <img id="logoPreview" class="logo-preview" alt="Aktuelles Logo">
+          <label class="field">
+            <span>Neues Logo (PNG mit transparentem Hintergrund empfohlen)</span>
+            <input type="file" id="fileLogo" accept="image/*" required>
+          </label>
+        </div>
+        <button class="btn btn-primary" type="submit" id="logoBtn">Logo austauschen</button>
+      </form>
+
+      <div class="admin-section-title">Neues Vorher/Nachher-Projekt</div>
       <form id="uploadForm" autocomplete="off">
         <label class="field">
           <span>Projektname</span>
@@ -1335,12 +1350,12 @@ footer{padding:80px 0 34px;}
         <button class="btn btn-primary" type="submit" id="uploadBtn">Projekt hinzufügen</button>
       </form>
 
-      <div class="admin-section-title">Gespeicherte Projekte</div>
+      <div class="admin-section-title">Veröffentlichte Projekte</div>
       <div class="pair-list" id="pairList"></div>
 
       <p class="modal-note">
-        Die Bilder werden ausschließlich in diesem Browser gespeichert und automatisch auf maximal 1400&nbsp;px verkleinert.
-        Besucher der Website sehen sie nicht — dafür müssen die Bilder ins Repository hochgeladen werden.
+        Bilder werden auf maximal 1400&nbsp;px verkleinert und im Ordner <code>bilder/</code> des Repositorys gespeichert.
+        Nach dem Speichern baut GitHub die Seite neu, das dauert meist 1–2 Minuten, bis alle Besucher die Änderung sehen.
       </p>
     </div>
   </div>
@@ -1372,43 +1387,64 @@ if(reduced){
 /* =========================================================
    Vorher/Nachher-Referenzen + Admin-Bereich
    ---------------------------------------------------------
-   Achtung: Diese Website ist statisch (GitHub Pages).
-   Es gibt keinen Server, daher:
-   - Die Anmeldung ist eine reine Anzeige-Sperre, kein echter
-     Schutz. Wer den Quelltext liest, kommt daran vorbei.
-   - Hochgeladene Bilder liegen nur im localStorage dieses
-     Browsers und sind für Besucher nicht sichtbar.
+   Die Seite ist statisch (GitHub Pages). Alle Inhalte liegen
+   im Ordner bilder/:
+     bilder/daten.json      Liste der Projekte + Logo-Version
+     bilder/logo.png        das Logo
+     bilder/projekt-*.jpg   Vorher/Nachher-Bilder
+   Besucher lesen nur daten.json. Der Admin-Bereich schreibt
+   über die GitHub-API direkt ins Repository (ein Commit pro
+   Aktion). Dafür braucht es einen GitHub-Token mit
+   Schreibrechten auf dieses Repository – im Code steht kein
+   Passwort mehr.
    ========================================================= */
 (function(){
   'use strict';
 
-  var STORE_KEY   = 'dietel_ba_pairs_v1';
-  var SESSION_KEY = 'dietel_admin_session';
-  var ADMIN_USER  = 'admin';
-  // SHA-256 von "admin:dieteldienstleistungen"
-  var ADMIN_HASH  = 'ad3276f8d02add7ca79a956933130285094e77aa99dc26dc800f2f7e1717972d';
+  var REPO        = 'LunarWaves03/Dietel-Handwerk-Dienstleistungen-Website';
+  var BRANCH      = 'main';
+  var DATA_PATH   = 'bilder/daten.json';
+  var LOGO_PATH   = 'bilder/logo.png';
+  var API         = 'https://api.github.com/repos/' + REPO;
+  var TOKEN_KEY   = 'dietel_gh_token';
   var MAX_SIDE    = 1400;
+  var LOGO_SIDE   = 800;
   var JPEG_Q      = 0.82;
 
-  /* ---------- Speicher ---------- */
-  function loadPairs(){
-    try{
-      var raw = localStorage.getItem(STORE_KEY);
-      var arr = raw ? JSON.parse(raw) : [];
-      return Array.isArray(arr) ? arr : [];
-    }catch(e){ return []; }
-  }
-  function savePairs(pairs){
-    try{
-      localStorage.setItem(STORE_KEY, JSON.stringify(pairs));
-      return true;
-    }catch(e){
-      return false;
-    }
+  var data  = { logoVersion: null, projekte: [] };
+  var pairs = [];
+  var index = 0;
+
+  /* ---------- Daten laden (für alle Besucher) ---------- */
+  function normalize(d){
+    d = d && typeof d === 'object' ? d : {};
+    return {
+      logoVersion: d.logoVersion || null,
+      projekte: Array.isArray(d.projekte) ? d.projekte : []
+    };
   }
 
-  var pairs = loadPairs();
-  var index = 0;
+  function applyLogo(){
+    var src = LOGO_PATH + (data.logoVersion ? '?v=' + data.logoVersion : '');
+    document.querySelectorAll('img[data-logo]').forEach(function(img){ img.src = src; });
+    var fav = document.getElementById('favicon');
+    if(fav) fav.href = src;
+    var prev = document.getElementById('logoPreview');
+    if(prev) prev.src = src;
+  }
+
+  function applyData(d){
+    data  = normalize(d);
+    pairs = data.projekte;
+    applyLogo();
+    renderSlider();
+  }
+
+  // Cache umgehen, damit neue Projekte sofort nach dem Deploy erscheinen
+  fetch(DATA_PATH + '?t=' + Date.now(), { cache: 'no-store' })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){ if(d) applyData(d); })
+    .catch(function(){ /* keine Daten – leerer Zustand bleibt */ });
 
   /* ---------- Slider ---------- */
   var ba       = document.getElementById('ba');
@@ -1444,10 +1480,7 @@ if(reduced){
     ba.hidden      = !has;
     baBar.hidden   = !has;
     baEmpty.hidden = has;
-    if(has){
-      // Beim Laden der Seite ein zufälliges Projekt zeigen
-      showPair(Math.floor(Math.random() * pairs.length));
-    }
+    if(has) showPair(Math.floor(Math.random() * pairs.length));
   }
 
   /* Ziehen mit Maus, Finger und Stift */
@@ -1470,8 +1503,7 @@ if(reduced){
 
   /* Bedienung per Tastatur */
   handle.addEventListener('keydown', function(e){
-    var raw = ba.style.getPropertyValue('--pos');
-    var cur = parseFloat(raw);
+    var cur = parseFloat(ba.style.getPropertyValue('--pos'));
     if(isNaN(cur)) cur = 50;
     var step = e.shiftKey ? 10 : 3;
     if(e.key === 'ArrowLeft'){ setPos(cur - step); e.preventDefault(); }
@@ -1482,6 +1514,72 @@ if(reduced){
 
   document.getElementById('baPrev').addEventListener('click', function(){ showPair(index - 1); });
   document.getElementById('baNext').addEventListener('click', function(){ showPair(index + 1); });
+
+  /* ---------- GitHub-API ---------- */
+  function token(){ return sessionStorage.getItem(TOKEN_KEY); }
+
+  function gh(method, path, body, tok){
+    return fetch(API + path, {
+      method: method,
+      headers: {
+        'Authorization': 'Bearer ' + (tok || token()),
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      },
+      body: body ? JSON.stringify(body) : undefined,
+      cache: 'no-store'
+    }).then(function(r){
+      if(r.status === 401){ sessionStorage.removeItem(TOKEN_KEY); throw new Error('Der Token ist ungültig oder abgelaufen. Bitte neu anmelden.'); }
+      if(r.status === 403) throw new Error('Der Token hat keine Schreibrechte für dieses Repository.');
+      if(r.status === 404 && method === 'GET') return null;
+      if(!r.ok) return r.text().then(function(t){ throw new Error('GitHub-Fehler ' + r.status + ': ' + t.slice(0, 160)); });
+      return r.status === 204 ? null : r.json();
+    });
+  }
+
+  // Aktuelle daten.json direkt aus dem Repo lesen (nicht aus dem Pages-Cache)
+  function loadRepoData(){
+    return gh('GET', '/contents/' + DATA_PATH + '?ref=' + BRANCH).then(function(file){
+      if(!file) return normalize(null);
+      var json = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
+      return normalize(JSON.parse(json));
+    });
+  }
+
+  // Mehrere Dateien in EINEM Commit schreiben/löschen.
+  // files: [{path, base64}] – deletes: [path]
+  function commit(message, files, deletes){
+    var headSha, baseTree;
+    return gh('GET', '/git/ref/heads/' + BRANCH)
+      .then(function(ref){
+        headSha = ref.object.sha;
+        return gh('GET', '/git/commits/' + headSha);
+      })
+      .then(function(c){
+        baseTree = c.tree.sha;
+        return Promise.all(files.map(function(f){
+          return gh('POST', '/git/blobs', { content: f.base64, encoding: 'base64' })
+            .then(function(b){ return { path: f.path, mode: '100644', type: 'blob', sha: b.sha }; });
+        }));
+      })
+      .then(function(entries){
+        (deletes || []).forEach(function(p){
+          entries.push({ path: p, mode: '100644', type: 'blob', sha: null });
+        });
+        return gh('POST', '/git/trees', { base_tree: baseTree, tree: entries });
+      })
+      .then(function(tree){
+        return gh('POST', '/git/commits', { message: message, tree: tree.sha, parents: [headSha] });
+      })
+      .then(function(c){
+        return gh('PATCH', '/git/refs/heads/' + BRANCH, { sha: c.sha });
+      });
+  }
+
+  function jsonToBase64(obj){
+    return btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2) + '\n')));
+  }
+  function dataUrlToBase64(url){ return url.split(',')[1]; }
 
   /* ---------- Modal ---------- */
   var modal      = document.getElementById('modal');
@@ -1495,11 +1593,11 @@ if(reduced){
     lastFocus = document.activeElement;
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
-    if(sessionStorage.getItem(SESSION_KEY) === 'ok'){
+    if(token()){
       showAdmin();
     }else{
       showLogin();
-      document.getElementById('loginUser').focus();
+      document.getElementById('loginToken').focus();
     }
   }
   function closeModal(){
@@ -1510,7 +1608,18 @@ if(reduced){
     if(lastFocus) lastFocus.focus();
   }
   function showLogin(){ loginView.hidden = false; adminView.hidden = true; }
-  function showAdmin(){ loginView.hidden = true;  adminView.hidden = false; renderPairList(); }
+  function showAdmin(){
+    loginView.hidden = true;
+    adminView.hidden = false;
+    applyLogo();
+    renderPairList();
+    // Frischen Stand aus dem Repo holen
+    loadRepoData().then(function(d){ applyData(d); renderPairList(); })
+      .catch(function(err){
+        if(!token()){ showLogin(); loginError.textContent = err.message; loginError.hidden = false; }
+        else message(err.message, true);
+      });
+  }
 
   document.getElementById('openLogin').addEventListener('click', openModal);
   modal.addEventListener('click', function(e){
@@ -1521,48 +1630,40 @@ if(reduced){
   });
 
   /* ---------- Anmeldung ---------- */
-  function sha256Hex(str){
-    if(window.crypto && window.crypto.subtle){
-      return window.crypto.subtle
-        .digest('SHA-256', new TextEncoder().encode(str))
-        .then(function(buf){
-          return Array.prototype.map.call(new Uint8Array(buf), function(b){
-            return b.toString(16).padStart(2, '0');
-          }).join('');
-        });
-    }
-    return Promise.resolve(null);
-  }
-
   document.getElementById('loginForm').addEventListener('submit', function(e){
     e.preventDefault();
-    var user = document.getElementById('loginUser').value.trim();
-    var pass = document.getElementById('loginPass').value;
-    sha256Hex(user + ':' + pass).then(function(hash){
-      var ok = hash
-        ? (hash === ADMIN_HASH)
-        : (user === ADMIN_USER && pass === 'dieteldienstleistungen');
-      if(ok){
-        sessionStorage.setItem(SESSION_KEY, 'ok');
+    var btn = document.getElementById('loginBtn');
+    var tok = document.getElementById('loginToken').value.trim();
+    btn.disabled = true;
+    btn.textContent = 'Wird geprüft …';
+    gh('GET', '', null, tok)
+      .then(function(repo){
+        if(!repo) throw new Error('Repository nicht gefunden. Hat der Token Zugriff auf dieses Repository?');
+        if(!repo.permissions || !repo.permissions.push) throw new Error('Der Token hat keine Schreibrechte für dieses Repository.');
+        sessionStorage.setItem(TOKEN_KEY, tok);
         loginError.hidden = true;
         document.getElementById('loginForm').reset();
         showAdmin();
-      }else{
+      })
+      .catch(function(err){
+        loginError.textContent = err.message || 'Anmeldung fehlgeschlagen.';
         loginError.hidden = false;
-        document.getElementById('loginPass').value = '';
-        document.getElementById('loginPass').focus();
-      }
-    });
+      })
+      .then(function(){
+        btn.disabled = false;
+        btn.textContent = 'Anmelden';
+      });
   });
 
   document.getElementById('logoutBtn').addEventListener('click', function(){
-    sessionStorage.removeItem(SESSION_KEY);
+    sessionStorage.removeItem(TOKEN_KEY);
     showLogin();
     closeModal();
   });
 
   /* ---------- Bilder verarbeiten ---------- */
-  function processImage(file){
+  // asPng: für das Logo (Transparenz bleibt erhalten)
+  function processImage(file, maxSide, asPng){
     return new Promise(function(resolve, reject){
       if(!file || !/^image\//.test(file.type)){
         reject(new Error('Bitte eine Bilddatei auswählen.'));
@@ -1575,16 +1676,18 @@ if(reduced){
         img.onerror = function(){ reject(new Error('Das Bild konnte nicht geöffnet werden.')); };
         img.onload = function(){
           var w = img.naturalWidth, h = img.naturalHeight;
-          var scale = Math.min(1, MAX_SIDE / Math.max(w, h));
+          var scale = Math.min(1, maxSide / Math.max(w, h));
           w = Math.max(1, Math.round(w * scale));
           h = Math.max(1, Math.round(h * scale));
           var canvas = document.createElement('canvas');
           canvas.width = w; canvas.height = h;
           var ctx = canvas.getContext('2d');
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(0, 0, w, h);
+          if(!asPng){
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, w, h);
+          }
           ctx.drawImage(img, 0, 0, w, h);
-          resolve(canvas.toDataURL('image/jpeg', JPEG_Q));
+          resolve(asPng ? canvas.toDataURL('image/png') : canvas.toDataURL('image/jpeg', JPEG_Q));
         };
         img.src = reader.result;
       };
@@ -1596,44 +1699,111 @@ if(reduced){
     adminMsg.textContent = text;
     adminMsg.className = 'form-msg ' + (isError ? 'error' : 'ok');
     adminMsg.hidden = false;
+    adminMsg.scrollIntoView({ block: 'nearest' });
   }
 
+  function slugify(s){
+    return s.toLowerCase()
+      .replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0, 40) || 'projekt';
+  }
+
+  function busy(btn, on, label){
+    btn.disabled = on;
+    btn.textContent = label;
+  }
+
+  var LIVE_HINT = ' Für Besucher sichtbar in ca. 1–2 Minuten.';
+
+  /* ---------- Logo austauschen ---------- */
+  document.getElementById('logoForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn  = document.getElementById('logoBtn');
+    var file = document.getElementById('fileLogo').files[0];
+    var logoUrl;
+    busy(btn, true, 'Wird hochgeladen …');
+    processImage(file, LOGO_SIDE, true)
+      .then(function(url){
+        logoUrl = url;
+        return loadRepoData();
+      })
+      .then(function(d){
+        d.logoVersion = String(Date.now());
+        return commit('Logo aktualisiert', [
+          { path: LOGO_PATH, base64: dataUrlToBase64(logoUrl) },
+          { path: DATA_PATH, base64: jsonToBase64(d) }
+        ]).then(function(){ return d; });
+      })
+      .then(function(d){
+        applyData(d);
+        // Neues Logo sofort lokal anzeigen, bevor der Deploy fertig ist
+        document.querySelectorAll('img[data-logo]').forEach(function(img){ img.src = logoUrl; });
+        document.getElementById('logoPreview').src = logoUrl;
+        document.getElementById('logoForm').reset();
+        message('Logo wurde gespeichert.' + LIVE_HINT, false);
+      })
+      .catch(function(err){ message(err.message || 'Das Logo konnte nicht gespeichert werden.', true); })
+      .then(function(){ busy(btn, false, 'Logo austauschen'); });
+  });
+
+  /* ---------- Projekt hinzufügen ---------- */
   document.getElementById('uploadForm').addEventListener('submit', function(e){
     e.preventDefault();
     var btn   = document.getElementById('uploadBtn');
-    var title = document.getElementById('pairTitle').value.trim();
+    var title = document.getElementById('pairTitle').value.trim() || 'Projekt';
     var fB    = document.getElementById('fileBefore').files[0];
     var fA    = document.getElementById('fileAfter').files[0];
+    var id    = String(Date.now());
+    var base  = 'bilder/projekt-' + id + '-' + slugify(title);
+    var pBefore = base + '-vorher.jpg';
+    var pAfter  = base + '-nachher.jpg';
+    var imgs;
 
-    btn.disabled = true;
-    btn.textContent = 'Wird verarbeitet …';
-
-    Promise.all([processImage(fB), processImage(fA)])
-      .then(function(imgs){
-        var next = pairs.concat([{
-          id: String(Date.now()),
-          title: title || 'Projekt',
-          before: imgs[0],
-          after: imgs[1]
-        }]);
-        if(!savePairs(next)){
-          message('Der Speicher des Browsers ist voll. Bitte zuerst ältere Projekte löschen.', true);
-          return;
-        }
-        pairs = next;
+    busy(btn, true, 'Wird hochgeladen …');
+    Promise.all([processImage(fB, MAX_SIDE), processImage(fA, MAX_SIDE)])
+      .then(function(r){ imgs = r; return loadRepoData(); })
+      .then(function(d){
+        d.projekte = d.projekte.concat([{ id: id, title: title, before: pBefore, after: pAfter }]);
+        return commit('Referenz hinzugefügt: ' + title, [
+          { path: pBefore, base64: dataUrlToBase64(imgs[0]) },
+          { path: pAfter,  base64: dataUrlToBase64(imgs[1]) },
+          { path: DATA_PATH, base64: jsonToBase64(d) }
+        ]).then(function(){ return d; });
+      })
+      .then(function(d){
+        applyData(d);
         document.getElementById('uploadForm').reset();
         renderPairList();
-        renderSlider();
-        message('Projekt „' + (title || 'Projekt') + '" wurde gespeichert.', false);
+        message('Projekt „' + title + '“ wurde veröffentlicht.' + LIVE_HINT, false);
+      })
+      .catch(function(err){ message(err.message || 'Beim Hochladen ist etwas schiefgelaufen.', true); })
+      .then(function(){ busy(btn, false, 'Projekt hinzufügen'); });
+  });
+
+  /* ---------- Projekt löschen ---------- */
+  function deletePair(p, btn){
+    if(!confirm('Projekt „' + p.title + '“ wirklich von der Website entfernen?')) return;
+    btn.disabled = true;
+    btn.textContent = '…';
+    loadRepoData()
+      .then(function(d){
+        d.projekte = d.projekte.filter(function(x){ return x.id !== p.id; });
+        // Nur Dateien im bilder/-Ordner löschen, die das Admin-Panel selbst angelegt hat
+        var del = [p.before, p.after].filter(function(path){ return /^bilder\/projekt-/.test(path); });
+        return commit('Referenz entfernt: ' + p.title,
+          [{ path: DATA_PATH, base64: jsonToBase64(d) }], del).then(function(){ return d; });
+      })
+      .then(function(d){
+        applyData(d);
+        renderPairList();
+        message('Projekt wurde entfernt.' + LIVE_HINT, false);
       })
       .catch(function(err){
-        message(err.message || 'Beim Verarbeiten ist etwas schiefgelaufen.', true);
-      })
-      .then(function(){
+        message(err.message || 'Das Projekt konnte nicht gelöscht werden.', true);
         btn.disabled = false;
-        btn.textContent = 'Projekt hinzufügen';
+        btn.textContent = 'Löschen';
       });
-  });
+  }
 
   /* ---------- Liste im Adminbereich ---------- */
   function renderPairList(){
@@ -1643,7 +1813,7 @@ if(reduced){
     if(!pairs.length){
       var empty = document.createElement('p');
       empty.className = 'pair-empty';
-      empty.textContent = 'Noch keine Projekte gespeichert.';
+      empty.textContent = 'Noch keine Projekte veröffentlicht.';
       list.appendChild(empty);
       return;
     }
@@ -1669,13 +1839,7 @@ if(reduced){
       del.type = 'button';
       del.className = 'pair-del';
       del.textContent = 'Löschen';
-      del.addEventListener('click', function(){
-        pairs = pairs.filter(function(x){ return x.id !== p.id; });
-        savePairs(pairs);
-        renderPairList();
-        renderSlider();
-        message('Projekt wurde gelöscht.', false);
-      });
+      del.addEventListener('click', function(){ deletePair(p, del); });
 
       row.appendChild(thumbs);
       row.appendChild(name);
@@ -1684,6 +1848,7 @@ if(reduced){
     });
   }
 
+  applyLogo();
   renderSlider();
 })();
 </script>
