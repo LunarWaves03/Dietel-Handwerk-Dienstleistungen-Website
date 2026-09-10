@@ -1,4 +1,11 @@
 {
   "logoVersion": null,
-  "projekte": []
+  "projekte": [
+    {
+      "id": "1789076931865",
+      "title": "Einfahrt Hecke",
+      "before": "bilder/projekt-1789076931865-einfahrt-hecke-vorher.jpg",
+      "after": "bilder/projekt-1789076931865-einfahrt-hecke-nachher.jpg"
+    }
+  ]
 }
