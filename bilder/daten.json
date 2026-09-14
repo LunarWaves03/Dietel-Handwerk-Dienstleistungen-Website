@@ -42,6 +42,12 @@
       "title": "Abriss und Montage",
       "before": "bilder/projekt-1789419191758-abriss-und-montage-vorher.jpg",
       "after": "bilder/projekt-1789419191758-abriss-und-montage-nachher.jpg"
+    },
+    {
+      "id": "1789419385550",
+      "title": "Gewucher entfernen",
+      "before": "bilder/projekt-1789419385550-gewucher-entfernen-vorher.jpg",
+      "after": "bilder/projekt-1789419385550-gewucher-entfernen-nachher.jpg"
     }
   ]
 }
